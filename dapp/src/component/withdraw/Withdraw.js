@@ -7,7 +7,6 @@ import { Balance, ErrorText, InputContainer, SuppleContainer, SupplyTitle } from
 const Withdraw = ({ token, account_addr, isSupply = true, reload }) => {
 
     const [value, setValue] = useState()
-    const [unit, setUnit] = useState("ether")
     const [inputError, setInputError] = useState(false)
 
     const handleWithDraw = async () => {
@@ -46,7 +45,7 @@ const Withdraw = ({ token, account_addr, isSupply = true, reload }) => {
             <SupplyTitle>{isSupply ? "Supply" : "WithDraw"}</SupplyTitle>
             {account_addr && <Balance>Token: {token.toFixed(4)} cETH</Balance>}
             <InputContainer>
-                <Select defaultValue="ceth" onChange={value => setUnit(value)}>
+                <Select defaultValue="ceth">
                     <Select.Option value="ceth">cETH</Select.Option>
                 </Select>
                 <Input 

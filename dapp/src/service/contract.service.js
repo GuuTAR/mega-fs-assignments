@@ -24,7 +24,6 @@ export const getSupplyRatePerBlock = async () => {
 
 export const getExchangeRateCurrent = async () => {
     const response = await methods.exchangeRateCurrent().call()
-    console.log(response)
     return response / 1e18
 }
 

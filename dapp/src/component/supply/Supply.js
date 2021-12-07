@@ -8,7 +8,6 @@ import { Balance, ErrorText, InputContainer, ReceivingText, SuppleContainer, Sup
 const Supply = ({ balance, account_addr, isSupply = true, reload }) => {
 
     const [value, setValue] = useState()
-    const [unit, setUnit] = useState("ether")
     const [inputError, setInputError] = useState(false)
     const [exchangeRate, setExchangeRate] = useState(1)
 
@@ -25,13 +24,11 @@ const Supply = ({ balance, account_addr, isSupply = true, reload }) => {
 
     const handleSupply = async () => {
         if (!inputError) {
-            console.log("supply", value, unit)
             const result = await mint(value, account_addr)
             if (result) {
                 const token = result
                 Success("Supply asset successfully!", `You get ${token} cETH from transaction.`)
                 reload()
-                console.log(token)
             }
             else {
                 Error("Supply asset unsuccessfully!", "Something wrong...")
@@ -64,7 +61,7 @@ const Supply = ({ balance, account_addr, isSupply = true, reload }) => {
             <SupplyTitle>{isSupply ? "Supply" : "WithDraw"}</SupplyTitle>
             {account_addr && <Balance>Balance: {balance.toFixed(4)} ETH</Balance>}
             <InputContainer>
-                <Select defaultValue="ether" onChange={value => setUnit(value)}>
+                <Select defaultValue="ether">
                     <Select.Option value="ether">ether</Select.Option>
                 </Select>
                 <Input 
